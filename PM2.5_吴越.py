@@ -32,6 +32,11 @@ x_AMB_TEMP = []
 x_CH4 = []
 x_CO = []
 x_NMHC = []
+x_SO2 = []
+x_NO2 = []
+x_NOX = []
+x_PM10 = []
+x_PM2 = []
 y = []
 for i in range(len(Y_Train)):
     y.append(Y_Train[i])
@@ -41,34 +46,64 @@ for i in range(len(Y_Train)):
     x_CH4_sum = 0
     x_CO_sum = 0
     x_NMHC_sum = 0
+    x_SO2_sum = 0
+    x_NO2_sum = 0
+    x_NOX_sum = 0
+    x_PM10_sum = 0
+    x_PM2_sum = 0
 
     for j in range(9):
         x_AMB_TEMP_sum = x_AMB_TEMP_sum + float(x.iloc[0, j])
         x_CH4_sum = x_CH4_sum + float(x.iloc[1, j])
         x_CO_sum = x_CO_sum + float(x.iloc[2, j])
         x_NMHC_sum = x_NMHC_sum + float(x.iloc[3, j])
+        x_SO2_sum = x_SO2_sum + float(x.iloc[12, j])
+        x_NO2_sum = x_NO2_sum + float(x.iloc[5, j])
+        x_NOX_sum = x_NOX_sum + float(x.iloc[6, j])
+        x_PM10_sum = x_PM10_sum + float(x.iloc[8, j])
+        x_PM2_sum = x_PM2_sum + float(x.iloc[9, j])
     x_AMB_TEMP.append(x_AMB_TEMP_sum / 9)
     x_CH4.append(x_CH4_sum / 9)
     x_CO.append(x_CO_sum / 9)
     x_NMHC.append(x_NMHC_sum / 9)
+    x_NO2.append(x_NO2_sum / 9)
+    x_NOX.append(x_NOX_sum / 9)
+    x_SO2.append(x_SO2_sum / 9)
+    x_PM10.append(x_PM10_sum / 9)
+    x_PM2.append(x_PM2_sum / 9)
 plt.figure(figsize=(10, 6))
-plt.subplot(2, 2, 1)
+plt.subplot(2, 5, 1)
 plt.title('AMB_TEMP')
 plt.scatter(x_AMB_TEMP, y)
-plt.subplot(2, 2, 2)
+plt.subplot(2, 5, 2)
 plt.title('CH4')
 plt.scatter(x_CH4, y)
-plt.subplot(2, 2, 3)
+plt.subplot(2, 5, 3)
 plt.title('CO')
 plt.scatter(x_CO, y)
-plt.subplot(2, 2, 4)
+plt.subplot(2, 5, 4)
 plt.title('NMHC')
 plt.scatter(x_NMHC, y)
+plt.subplot(2, 5, 5)
+plt.title('SO2')
+plt.scatter(x_SO2, y)
+plt.subplot(2, 5, 6)
+plt.title('NO2')
+plt.scatter(x_NO2, y)
+plt.subplot(2, 5, 7)
+plt.title('NOX')
+plt.scatter(x_NOX, y)
+plt.subplot(2, 5, 8)
+plt.title('PM 10')
+plt.scatter(x_PM10, y)
+plt.subplot(2, 5, 9)
+plt.title('PM 2.5')
+plt.scatter(x_PM2, y)
 plt.show()
 
 '''小批量梯度下降'''
 dict={0:8,1:8,2:8,3:8,4:8,5:8,6:8,7:8,8:8,9:9,10:9,11:9,12:9,13:9,14:9,15:9,16:9,17:9,18:12,19:12,20:12,21:12,22:12,23:12,24:12,25:12,26:12}
-iteration_count = 10000   #迭代次数
+iteration_count = 200   #迭代次数
 learning_rate = 0.000001  #学习速率
 b=0.0001    #初始化偏移项
 parameters=[0.001]*27     #初始化27个参数
